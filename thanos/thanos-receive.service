@@ -4,7 +4,7 @@
 Description=Thanos Receive service.
 Documentation=https://thanos.io/tip/thanos/
 After=network.target
-After=prometheus2.service
+After=prometheus.service
 
 [Service]
 EnvironmentFile=-/etc/default/thanos-receive

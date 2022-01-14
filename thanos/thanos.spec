@@ -66,11 +66,11 @@ install -D -m 644 %{SOURCE14} %{buildroot}%{_unitdir}/thanos-receive.service
 install -D -m 644 %{SOURCE15} %{buildroot}%{_sysconfdir}/default/thanos-receive
 
 %pre
-getent group prometheus >/dev/null || groupadd -r prometheus
-getent passwd prometheus >/dev/null || \
-  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
-          -c "Prometheus services" prometheus
-exit 0
+#getent group prometheus >/dev/null || groupadd -r prometheus
+#getent passwd prometheus >/dev/null || \
+#  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
+#          -c "Prometheus services" prometheus
+#exit 0
 
 %post
 %systemd_post thanos-sidecar.service
@@ -100,7 +100,7 @@ exit 0
 %systemd_postun thanos-receive.service
 
 %files
-%defattr(-,root,root,-)
+%defattr(-,prometheus,prometheus,-)
 %{_bindir}/%{name}
 %{_unitdir}/thanos-sidecar.service
 %{_unitdir}/thanos-store.service

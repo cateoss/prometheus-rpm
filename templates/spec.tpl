@@ -103,24 +103,24 @@ install -D -m {{ additional_source.mode|d('644') }} {{ additional_source.path if
 
 %pre
 {%- block pre %}
-{%- if group != "root" %}
-getent group {{ group }} >/dev/null || groupadd -r {{ group }}
-{%- endif %}
-{%- if user != "root" %}
-{%-   if user == "prometheus" %}
-getent passwd {{ user }} >/dev/null || \
-  useradd -r -g {{ group }} -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
-          -c "Prometheus services" {{ user }}
-{%-   else %}
-getent passwd {{ user }} >/dev/null || \
-  useradd -r -g {{ group }} -d %{_sharedstatedir}/%{name} -s /sbin/nologin \
-          -c "{{ name }} service" {{ user }}
-{%-   endif %}
-{%- endif %}
-exit 0
-{%- for pre_cmd in pre_cmds %}
-{{ pre_cmd }}
-{%- endfor %}
+#{%- if group != "root" %}
+#getent group {{ group }} >/dev/null || groupadd -r {{ group }}
+#{%- endif %}
+#{%- if user != "root" %}
+#{%-   if user == "prometheus" %}
+#getent passwd {{ user }} >/dev/null || \
+#  useradd -r -g {{ group }} -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
+#          -c "Prometheus services" {{ user }}
+#{%-   else %}
+#getent passwd {{ user }} >/dev/null || \
+#  useradd -r -g {{ group }} -d %{_sharedstatedir}/%{name} -s /sbin/nologin \
+#          -c "{{ name }} service" {{ user }}
+#{%-   endif %}
+#{%- endif %}
+#exit 0
+#{%- for pre_cmd in pre_cmds %}
+#{{ pre_cmd }}
+#{%- endfor %}
 {% endblock pre %}
 
 %post
