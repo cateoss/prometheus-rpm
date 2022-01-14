@@ -1,4 +1,4 @@
-MANUAL = prometheus2 \
+MANUAL = prometheus \
 thanos \
 jmx_exporter \
 rabbitmq_exporter \

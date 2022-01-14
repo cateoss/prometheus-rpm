@@ -30,11 +30,11 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 install -D -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/default/%{name}
 
 %pre
-getent group prometheus >/dev/null || groupadd -r prometheus
-getent passwd prometheus >/dev/null || \
-  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
-          -c "Prometheus services" prometheus
-exit 0
+#getent group prometheus >/dev/null || groupadd -r prometheus
+#getent passwd prometheus >/dev/null || \
+#  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
+#          -c "Prometheus services" prometheus
+#exit 0
 
 %post
 %systemd_post %{name}.service
@@ -46,7 +46,7 @@ exit 0
 %systemd_postun %{name}.service
 
 %files
-%defattr(-,root,root,-)
+%defattr(-,prometheus,prometheus,-)
 %caps(cap_net_raw=ep) %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/default/%{name}

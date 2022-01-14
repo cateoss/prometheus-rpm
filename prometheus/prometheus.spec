@@ -1,6 +1,6 @@
 %global debug_package %{nil}
 
-Name:		 prometheus2
+Name:		 prometheus
 Version: 2.32.1
 Release: 1%{?dist}
 Summary: The Prometheus monitoring system and time series database.
@@ -41,11 +41,11 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/prometheus.service
 install -D -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/default/prometheus
 
 %pre
-getent group prometheus >/dev/null || groupadd -r prometheus
-getent passwd prometheus >/dev/null || \
-  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
-          -c "Prometheus services" prometheus
-exit 0
+#getent group prometheus >/dev/null || groupadd -r prometheus
+#getent passwd prometheus >/dev/null || \
+#  useradd -r -g prometheus -d %{_sharedstatedir}/prometheus -s /sbin/nologin \
+#          -c "Prometheus services" prometheus
+#exit 0
 
 %post
 %systemd_post prometheus.service
@@ -57,7 +57,7 @@ exit 0
 %systemd_postun prometheus.service
 
 %files
-%defattr(-,root,root,-)
+%defattr(-,prometheus,prometheus,-)
 %{_bindir}/prometheus
 %{_bindir}/promtool
 %config(noreplace) %{_sysconfdir}/prometheus/prometheus.yml
